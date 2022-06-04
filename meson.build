@@ -1,4 +1,4 @@
-project('madshader', ['cpp'], default_options: ['cpp_std=c++17', 'buildtype=debug'])
+project('madshader', ['cpp'], default_options: ['buildtype=debug'])
 
 os_system = target_machine.system()
 cflags = []
@@ -13,7 +13,7 @@ glm = dependency('glm', required: true)
 glew = dependency('glew', required: true)
 glfw = dependency('glfw3', required:true)
 
-madshader_srcs = files('main.cpp')
+madshader_srcs = files('main.cpp', 'sdrman.cpp')
 madshader_incs = include_directories('.')
 executable('madshader', madshader_srcs,
            include_directories: [madshader_incs],
