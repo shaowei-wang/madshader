@@ -1,4 +1,5 @@
-project('madshader', ['cpp'], default_options: ['buildtype=debug'])
+project('madshader', ['cpp'],
+        default_options: ['buildtype=debug', 'cpp_std=c++17'])
 
 os_system = target_machine.system()
 cflags = []
@@ -12,6 +13,7 @@ gl = dependency('OpenGL', required:true)
 glm = dependency('glm', required: true)
 glew = dependency('glew', required: true)
 glfw = dependency('glfw3', required:true)
+config = dependency('libconfig', required:true)
 
 madshader_srcs = files('main.cpp', 'sdrman.cpp')
 madshader_incs = include_directories('.')

@@ -34,6 +34,7 @@ int sdrman::setShaderStr(std::string shaderStr, GLenum shadertype)
 
     switch (shadertype) {
     case GL_VERTEX_SHADER: {
+        glDetachShader(progId, vsId_);
         glDeleteShader(vsId_);
         vsId_ = glCreateShader(GL_VERTEX_SHADER);
         const char *s = shaderStr.c_str();
@@ -44,6 +45,7 @@ int sdrman::setShaderStr(std::string shaderStr, GLenum shadertype)
     }
         break;
     case GL_FRAGMENT_SHADER: {
+        glDetachShader(progId, fsId_);
         glDeleteShader(fsId_);
         fsId_ = glCreateShader(GL_FRAGMENT_SHADER);
         const char *s = shaderStr.c_str();

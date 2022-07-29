@@ -14,16 +14,12 @@
 
 #include "sdrman.h"
 
-std::string appTitle = "Mad Shader";
+std::string appTitle = "Mad Pixels";
 
 static struct option longopts[] = {
     {"width", required_argument, NULL, 'w'},
     {"height", required_argument, NULL, 'h'},
-    {"vs", required_argument, NULL, 'v'}, // vertex shader file
-    {"fs", required_argument, NULL, 'f'}, // fragment shader file
-    {"tex", required_argument, NULL, 't'}, // texture file (image file)
-    {"mod", required_argument, NULL, 'm'}, // model file
-
+    {"config", required_argument, NULL, 'c'},
 };
 
 static void glfw_error_callback(int error, const char* desc)
@@ -76,7 +72,6 @@ std::vector<std::string> fs_shader;
 std::vector<std::string> tex_images;
 int win_width = 1024, win_height = 768;
 
-
 int
 main(int argc, char *argv[])
 {
@@ -87,7 +82,7 @@ main(int argc, char *argv[])
     uint64_t iFrameCount = 0;
     sdrman sm;
     
-    while ((ch = getopt_long(argc, argv, "w:h:v:f:t:m:", longopts, NULL)) != -1) {
+    while ((ch = getopt_long(argc, argv, "w:h:c:", longopts, NULL)) != -1) {
         switch (ch) {
         case 'w':
             win_width = atoi(optarg);
@@ -95,19 +90,12 @@ main(int argc, char *argv[])
         case 'h':
             win_height = atoi(optarg);
             break;
-        case 'f':
-            break;
-        case 't':
+        case 'c':
             break;
         default:
             break;
         }
     }
-
-    // if (fs_shader.size() == 0) {
-    //     std::cerr << "need --fs [fragment shaders]" << std::endl;
-    //     return -1;
-    // }
 
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit()) {
